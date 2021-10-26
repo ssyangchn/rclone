@@ -149,7 +149,7 @@ jobs:
           make compile_all
         if: matrix.compile_all
 
-      - name: Upload artifact
+      - name: Upload artifacts
         uses: actions/upload-artifact@v2.2.4
         with:
           name: my-artifact
