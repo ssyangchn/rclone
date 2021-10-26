@@ -210,6 +210,13 @@ jobs:
           make compile_all
         if: matrix.compile_all
 
+      - name: Upoad to github
+        shell: bash
+        run: |
+          make upload_github
+        env:
+          RCLONE_CONFIG_PASS: ${{ secrets.RCLONE_CONFIG_PASS }}
+
       - name: Deploy built binaries
         shell: bash
         run: |
