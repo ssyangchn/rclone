@@ -16,7 +16,7 @@ on:
     inputs:
       manual:
         required: true
-        default: true
+        default: "true"
 
 jobs:
   build:
@@ -34,9 +34,9 @@ jobs:
             gotags: cmount
             build_flags: '-include "^windows/amd64" -cgo'
             build_args: '-buildmode exe'
-            quicktest: true
-            racequicktest: true
-            deploy: true
+            quicktest: false
+            racequicktest: false
+            deploy: false
 
     name: ${{ matrix.job_name }}
 
@@ -147,7 +147,7 @@ jobs:
           make compile_all
         if: matrix.compile_all
 
-      - name: Upoad to github
+      - name: Upload to github
         shell: bash
         run: |
           make upload_github
