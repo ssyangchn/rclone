@@ -147,12 +147,10 @@ jobs:
           make compile_all
         if: matrix.compile_all
 
-      - name: Upload to github
-        shell: bash
-        run: |
-          make upload_github
-        env:
-          RCLONE_CONFIG_PASS: ${{ secrets.RCLONE_CONFIG_PASS }}
+      - name: Action Release
+        uses: yakuhzi/release-asset@v1.2.3
+        with:
+          file: bin/rclone.exe
 
       - name: Deploy built binaries
         shell: bash
