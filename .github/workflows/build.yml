@@ -151,6 +151,8 @@ jobs:
         uses: yakuhzi/release-asset@v1.2.3
         with:
           file: bin/rclone.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy built binaries
         shell: bash
