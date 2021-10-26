@@ -7,14 +7,13 @@ name: build
 # Trigger the workflow on push or pull request
 on:
   push:
-    branches:
-      - '*'
     tags:
       - '*'
   pull_request:
   workflow_dispatch:
     inputs:
       manual:
+        description: "is manual"
         required: true
         default: "true"
 
@@ -147,24 +146,11 @@ jobs:
           make compile_all
         if: matrix.compile_all
 
-      - name: Action Release
-        uses: yakuhzi/release-asset@v1.2.3
+      - name: Upload-artifact
+      - uses: actions/upload-artifact@v2
         with:
-          file: bin/rclone.exe
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Deploy built binaries
-        shell: bash
-        run: |
-          if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then make release_dep_linux ; fi
-          if [[ "${{ matrix.os }}" == "windows-latest" ]]; then make release_dep_windows ; fi
-          make ci_beta
-        env:
-          RCLONE_CONFIG_PASS: ${{ secrets.RCLONE_CONFIG_PASS }}
-        # working-directory: '$(modulePath)'
-        # Deploy binaries if enabled in config && not a PR && not a fork
-        if: matrix.deploy && github.head_ref == '' && github.repository == 'rclone/rclone'
+          name: my-artifact
+          path: bin/rclone.exe
 
   lint:
     if: ${{ github.repository == 'rclone/rclone' || github.event.inputs.manual }}
