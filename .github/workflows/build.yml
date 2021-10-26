@@ -61,7 +61,7 @@ jobs:
           echo 'GOTAGS=${{ matrix.gotags }}' >> $GITHUB_ENV
           echo 'BUILD_FLAGS=${{ matrix.build_flags }}' >> $GITHUB_ENV
           echo 'BUILD_ARGS=${{ matrix.build_args }}' >> $GITHUB_ENV
-          echo 'ASSET_PATH=$(go env GOPATH)/bin/rclone$(go env GOEXE)' >> $GITHUB_ENV
+          echo "ASSET_PATH=$(go env GOPATH)/bin/rclone$(go env GOEXE)" >> $GITHUB_ENV
           if [[ "${{ matrix.goarch }}" != "" ]]; then echo 'GOARCH=${{ matrix.goarch }}' >> $GITHUB_ENV ; fi
           if [[ "${{ matrix.cgo }}" != "" ]]; then echo 'CGO_ENABLED=${{ matrix.cgo }}' >> $GITHUB_ENV ; fi
 
