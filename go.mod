@@ -4,6 +4,8 @@ go 1.14
 
 replace github.com/jlaffaye/ftp => github.com/rclone/ftp v1.0.0-210902f
 
+replace golang.org/x/oauth2 => github.com/ssyangchn/oauth2 v0.0.0-20211114101256-3cb08f61ed6b
+
 require (
 	bazil.org/fuse v0.0.0-20200524192727-fb710f7dfd05
 	cloud.google.com/go v0.93.3 // indirect

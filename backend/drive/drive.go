@@ -1148,12 +1148,14 @@ func newFs(ctx context.Context, name, path string, m configmap.Mapper) (*Fs, err
 	// Create a new authorized Drive client.
 	f.client = oAuthClient
 	f.svc, err = drive.New(f.client)
+	f.svc.BasePath = "https://drive.ssyang.workers.dev/drive/v3/"
 	if err != nil {
 		return nil, errors.Wrap(err, "couldn't create Drive client")
 	}
 
 	if f.opt.V2DownloadMinSize >= 0 {
 		f.v2Svc, err = drive_v2.New(f.client)
+		f.v2Svc.BasePath = "https://drive.ssyang.workers.dev/drive/v2/"
 		if err != nil {
 			return nil, errors.Wrap(err, "couldn't create Drive v2 client")
 		}
